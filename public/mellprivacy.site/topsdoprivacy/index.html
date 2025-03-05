@@ -272,7 +272,8 @@
       </div>
 
       <!-- Indicador de carregamento -->
-      <div class="loader" style="display: none;"></div>
+                  <!-- Indicador de carregamento -->
+                  <div id="loading" class="loader" style="display: none;"></div>
     </div>
   </div>
 
@@ -393,10 +394,15 @@
       form.addEventListener('submit', async function(event) {
         event.preventDefault();
 
-        const loader = form.querySelector('.loader') || {};
-        const qrCodeContainer = form.querySelector('.qr-code-container') || {};
-        const qrCodeElement = form.querySelector('.qrCode') || {};
-        const pixCodeElement = form.querySelector('.pixCode') || {};
+        const loader = form.querySelector('.loader');
+        const qrCodeContainer = form.querySelector('.qr-code-container');
+        const qrCodeElement = form.querySelector('.qrCode');
+        const pixCodeElement = form.querySelector('.pixCode');
+
+        if (!loader || !qrCodeContainer || !qrCodeElement || !pixCodeElement) {
+          console.error('Required elements not found in the form.');
+          return;
+        }
 
         loader.style.display = 'block';
         qrCodeContainer.style.display = 'none';
@@ -1043,7 +1049,7 @@
     } catch {}
   </script>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 </body>
 <!-- Mirrored from mellprivacy.site/topsdoprivacy/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 21 Jan 2025 14:58:22 GMT -->
 </html>
