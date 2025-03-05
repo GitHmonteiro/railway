@@ -125,37 +125,17 @@
   <h6 class="title-subscribe">ASSINATURAS</h6>
 
   <!-- Botão de Assinatura -->
-  <a href="#" onclick="openModal('7 DIAS', 'R$ 11,99 / 7 dias')" class="subscribe-btn mt-2">
+  <a href="#" onclick="openModal('7 DIAS', 'R$ 11,99 / 7 dias', 'modal7Dias')" class="subscribe-btn mt-2">
     <span>Assinar (7 DIAS)</span>
     <span>11.99</span>
   </a>
 
-  <!-- Seção de Assinaturas -->
-  <br>
-  <h6 class="title-subscribe">ASSINATURAS</h6>
-
-  <!-- Botão de Assinatura -->
-  <a href="#" onclick="openModal('1 MÊS', 'R$ 19,90 / mês')" class="subscribe-btn mt-2">
-    <span>Assinar (1 MÊS)</span>
-    <span> R$ 19,90 / mês </span>
-  </a>
-
-  <!-- Seção de Assinaturas -->
-  <br>
-  <h6 class="title-subscribe">ASSINATURAS (30% OFF)</h6>
-
-  <!-- Botão de Assinatura -->
-  <a href="#" onclick="openModal('VITALICIO', 'R$ 27,90 / mês')" class="subscribe-btn mt-2">
-    <span>Assinar (VITALICIO)</span>
-    <span> R$ 27,90 / mês </span>
-  </a>
-
-  <!-- Modal -->
-  <div id="donationModal" class="modal">
+  <!-- Modal 7 DIAS -->
+  <div id="modal7Dias" class="modal">
     <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
+      <span class="close" onclick="closeModal('modal7Dias')">&times;</span>
       <h2>Pagar via PIX</h2>
-      <form id="donationForm">
+      <form class="donationForm">
         <div class="form-group">
           <label for="nome">Nome Completo:</label>
           <input type="text" id="nome" name="nome" required>
@@ -165,88 +145,205 @@
           <input type="email" id="email" name="email" required>
         </div>
         <div class="form-group">
+          <label for="usuario">Nome de usuário:</label>
+          <input type="text" id="usuario" name="usuario" required>
+        </div>
+        <div class="form-group">
+          <label for="senha">Senha:</label>
+          <input type="password" id="senha" name="senha" required>
+        </div>
+        <div class="form-group">
           <label for="valor">Valor:</label>
-          <input type="text" id="valor" name="valor" readonly>
+          <input type="text" id="valor" name="valor" value="11.99" readonly>
         </div>
         <button type="submit" class="donate-button">Gerar PIX</button>
       </form>
 
       <!-- Área para exibir o QR Code e o código PIX -->
-      <div id="pixResult" class="qr-code-container" style="display: none;">
+      <div class="qr-code-container" style="display: none;">
         <h3>Pague com PIX</h3>
-        <canvas id="qrCode"></canvas>
-        <p id="pixCode"></p>
+        <canvas class="qrCode"></canvas>
+        <p class="pixCode"></p>
         <button class="copy-button" onclick="copyPixCode()">Copiar Código PIX</button>
       </div>
 
       <!-- Indicador de carregamento -->
-      <div id="loading" class="loader" style="display: none;"></div>
+      <div class="loader" style="display: none;"></div>
+    </div>
+  </div>
+
+  <!-- Seção de Assinaturas -->
+  <br>
+  <h6 class="title-subscribe">ASSINATURAS</h6>
+
+  <!-- Botão de Assinatura -->
+  <a href="#" onclick="openModal('1 MÊS', 'R$ 19,90 / mês', 'modal1Mes')" class="subscribe-btn mt-2">
+    <span>Assinar (1 MÊS)</span>
+    <span> R$ 19,90 / mês </span>
+  </a>
+
+  <!-- Modal 1 MÊS -->
+  <div id="modal1Mes" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modal1Mes')">&times;</span>
+      <h2>Pagar via PIX</h2>
+      <form class="donationForm">
+        <div class="form-group">
+          <label for="nome">Nome Completo:</label>
+          <input type="text" id="nome" name="nome" required>
+        </div>
+        <div class="form-group">
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="usuario">Nome de usuário:</label>
+          <input type="text" id="usuario" name="usuario" required>
+        </div>
+        <div class="form-group">
+          <label for="senha">Senha:</label>
+          <input type="password" id="senha" name="senha" required>
+        </div>
+        <div class="form-group">
+          <label for="valor">Valor:</label>
+          <input type="text" id="valor" name="valor" value="19.90" readonly>
+        </div>
+        <button type="submit" class="donate-button">Gerar PIX</button>
+      </form>
+
+      <!-- Área para exibir o QR Code e o código PIX -->
+      <div class="qr-code-container" style="display: none;">
+        <h3>Pague com PIX</h3>
+        <canvas class="qrCode"></canvas>
+        <p class="pixCode"></p>
+        <button class="copy-button" onclick="copyPixCode()">Copiar Código PIX</button>
+      </div>
+
+      <!-- Indicador de carregamento -->
+      <div class="loader" style="display: none;"></div>
+    </div>
+  </div>
+
+  <!-- Seção de Assinaturas -->
+  <br>
+  <h6 class="title-subscribe">ASSINATURAS (30% OFF)</h6>
+
+  <!-- Botão de Assinatura -->
+  <a href="#" onclick="openModal('VITALICIO', 'R$ 27,90 / mês', 'modalVitalicio')" class="subscribe-btn mt-2">
+    <span>Assinar (VITALICIO)</span>
+    <span> R$ 27,90 / mês </span>
+  </a>
+
+  <!-- Modal VITALICIO -->
+  <div id="modalVitalicio" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('modalVitalicio')">&times;</span>
+      <h2>Pagar via PIX</h2>
+      <form class="donationForm">
+        <div class="form-group">
+          <label for="nome">Nome Completo:</label>
+          <input type="text" id="nome" name="nome" required>
+        </div>
+        <div class="form-group">
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="usuario">Nome de usuário:</label>
+          <input type="text" id="usuario" name="usuario" required>
+        </div>
+        <div class="form-group">
+          <label for="senha">Senha:</label>
+          <input type="password" id="senha" name="senha" required>
+        </div>
+        <div class="form-group">
+          <label for="valor">Valor:</label>
+          <input type="text" id="valor" name="valor" value="27.90" readonly>
+        </div>
+        <button type="submit" class="donate-button">Gerar PIX</button>
+      </form>
+
+      <!-- Área para exibir o QR Code e o código PIX -->
+      <div class="qr-code-container" style="display: none;">
+        <h3>Pague com PIX</h3>
+        <canvas class="qrCode"></canvas>
+        <p class="pixCode"></p>
+        <button class="copy-button" onclick="copyPixCode()">Copiar Código PIX</button>
+      </div>
+
+      <!-- Indicador de carregamento -->
+      <div class="loader" style="display: none;"></div>
     </div>
   </div>
 
   <script>
-    function openModal(plan, price) {
-      document.getElementById('valor').value = 11.99;
-      document.getElementById('donationModal').style.display = 'block';
+    function openModal(plan, price, modalId) {
+      document.getElementById(modalId).style.display = 'block';
     }
 
-    function closeModal() {
-      document.getElementById('donationModal').style.display = 'none';
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = 'none';
     }
 
-    document.getElementById('donationForm').addEventListener('submit', async function(event) {
-      event.preventDefault();
+    document.querySelectorAll('.donationForm').forEach(form => {
+      form.addEventListener('submit', async function(event) {
+        event.preventDefault();
 
-      document.getElementById('loading').style.display = 'block';
-      document.getElementById('pixResult').style.display = 'none';
+        const loader = form.querySelector('.loader');
+        const qrCodeContainer = form.querySelector('.qr-code-container');
+        const qrCodeElement = form.querySelector('.qrCode');
+        const pixCodeElement = form.querySelector('.pixCode');
 
-      const formData = {
-        nome: document.getElementById('nome').value,
-        email: document.getElementById('email').value,
-        valor: document.getElementById('valor').value
-      };
+        loader.style.display = 'block';
+        qrCodeContainer.style.display = 'none';
 
-      try {
-        const response = await fetch('/api/process-pix', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(formData)
-        });
+        const formData = {
+          nome: form.querySelector('#nome').value,
+          email: form.querySelector('#email').value,
+          valor: form.querySelector('#valor').value
+        };
 
-        const data = await response.json();
-
-        if (data.status === 'success') {
-          const qrCodeElement = document.getElementById('qrCode');
-          qrCodeElement.innerHTML = '';
-
-          if (!data.paymentCode || typeof data.paymentCode !== 'string') {
-            throw new Error('Código PIX inválido ou ausente.');
-          }
-
-          QRCode.toCanvas(qrCodeElement, data.paymentCode, { width: 200 }, function (error) {
-            if (error) {
-              console.error('Erro ao gerar QR Code:', error);
-              alert('Erro ao gerar QR Code. Verifique o código PIX.');
-            } else {
-              document.getElementById('pixResult').style.display = 'block';
-              document.getElementById('pixCode').innerText = data.paymentCode;
-            }
+        try {
+          const response = await fetch('/api/process-pix', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
           });
-        } else {
-          alert('Erro ao gerar PIX: ' + data.message);
+
+          const data = await response.json();
+
+          if (data.status === 'success') {
+            qrCodeElement.innerHTML = '';
+
+            if (!data.paymentCode || typeof data.paymentCode !== 'string') {
+              throw new Error('Código PIX inválido ou ausente.');
+            }
+
+            QRCode.toCanvas(qrCodeElement, data.paymentCode, { width: 200 }, function (error) {
+              if (error) {
+                console.error('Erro ao gerar QR Code:', error);
+                alert('Erro ao gerar QR Code. Verifique o código PIX.');
+              } else {
+                qrCodeContainer.style.display = 'block';
+                pixCodeElement.innerText = data.paymentCode;
+              }
+            });
+          } else {
+            alert('Erro ao gerar PIX: ' + data.message);
+          }
+        } catch (error) {
+          console.error('Erro:', error);
+          alert('Erro ao processar a solicitação: ' + error.message);
+        } finally {
+          loader.style.display = 'none';
         }
-      } catch (error) {
-        console.error('Erro:', error);
-        alert('Erro ao processar a solicitação: ' + error.message);
-      } finally {
-        document.getElementById('loading').style.display = 'none';
-      }
+      });
     });
 
     function copyPixCode() {
-      const pixCode = document.getElementById('pixCode').innerText;
+      const pixCode = document.querySelector('.pixCode').innerText;
       navigator.clipboard.writeText(pixCode).then(() => {
         alert('Código PIX copiado com sucesso! Agora é só pagar pelo APP do banco.');
       }).catch(err => {
@@ -943,8 +1040,13 @@
     });
     } catch {}
   </script>
+
+  
+
 </div>
-<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+   
+
 </body>
 <!-- Mirrored from mellprivacy.site/topsdoprivacy/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 21 Jan 2025 14:58:22 GMT -->
 </html>
