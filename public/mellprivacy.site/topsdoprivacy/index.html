@@ -191,8 +191,26 @@
     <div id="loading" class="loader" style="display: none;"></div>
   </div>
 </div>
+<div id="customAlert" class="custom-alert">
+  <p id="alertMessage"></p>
+</div>
 
 <script>
+    function showCustomAlert(message) {
+  const alertBox = document.getElementById('customAlert');
+  const alertMessage = document.getElementById('alertMessage');
+
+  alertMessage.textContent = message;
+  alertBox.style.display = 'block';
+
+  setTimeout(() => {
+    alertBox.style.display = 'none';
+  }, 3000); // Fecha após 3 segundos
+}
+
+// Exemplo de uso
+showCustomAlert('Código PIX copiado com sucesso! Agora é só pagar pelo APP do banco.');
+
   // Função para formatar o preço corretamente
   function formatPrice(price) {
      let numericValue = price.replace(/[^\d,]/g, '').replace(',', '.');
@@ -289,6 +307,30 @@
 </script>
 
   <style>
+.custom-alert {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  font-size: 16px;
+  text-align: center;
+  min-width: 250px;
+  max-width: 80%;
+  animation: fadeInOut 3s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  10% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  90% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+}
 
       .qr-code-container {
   text-align: center;
