@@ -106,6 +106,110 @@
   </button>
   </div>
 
+  <style>
+    /* Estilos básicos para o modal e botão */
+    .donate-button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      background-color: white;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+      position: relative;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: black;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+
+    .value-buttons button {
+      margin-right: 5px;
+      padding: 5px 10px;
+      background-color: #f1f1f1;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .value-buttons button:hover {
+      background-color: #ddd;
+    }
+
+    .qr-code-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .copy-button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .loader {
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #4CAF50;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+
   <!-- Redes Sociais -->
   <div class="flex space-x-3 mt-2">
     <!-- <a href="#pay" track="initiate_checkout" class="icon-circle">
@@ -289,10 +393,10 @@
       form.addEventListener('submit', async function(event) {
         event.preventDefault();
 
-        const loader = form.querySelector('.loader');
-        const qrCodeContainer = form.querySelector('.qr-code-container');
-        const qrCodeElement = form.querySelector('.qrCode');
-        const pixCodeElement = form.querySelector('.pixCode');
+        const loader = form.querySelector('.loader') || {};
+        const qrCodeContainer = form.querySelector('.qr-code-container') || {};
+        const qrCodeElement = form.querySelector('.qrCode') || {};
+        const pixCodeElement = form.querySelector('.pixCode') || {};
 
         loader.style.display = 'block';
         qrCodeContainer.style.display = 'none';
@@ -352,109 +456,7 @@
     }
   </script>
 
-  <style>
-    /* Estilos básicos para o modal e botão */
-    .donate-button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-    }
-
-    .modal-content {
-      background-color: white;
-      margin: 10% auto;
-      padding: 20px;
-      border-radius: 10px;
-      width: 90%;
-      max-width: 500px;
-      position: relative;
-    }
-
-    .close {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .close:hover {
-      color: black;
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .form-group input {
-      width: 100%;
-      padding: 8px;
-      box-sizing: border-box;
-    }
-
-    .value-buttons button {
-      margin-right: 5px;
-      padding: 5px 10px;
-      background-color: #f1f1f1;
-      border: 1px solid #ccc;
-      border-radius: 3px;
-      cursor: pointer;
-    }
-
-    .value-buttons button:hover {
-      background-color: #ddd;
-    }
-
-    .qr-code-container {
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    .copy-button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .loader {
-      border: 5px solid #f3f3f3;
-      border-top: 5px solid #4CAF50;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      animation: spin 1s linear infinite;
-      margin: 20px auto;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-  </style>
+  
   <script
   src="../../cdn.utmify.com.br/scripts/utms/latest.js"
   data-utmify-prevent-subids
@@ -1040,12 +1042,7 @@
     });
     } catch {}
   </script>
-
-  
-
 </div>
-
-   
 <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 </body>
 <!-- Mirrored from mellprivacy.site/topsdoprivacy/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 21 Jan 2025 14:58:22 GMT -->
