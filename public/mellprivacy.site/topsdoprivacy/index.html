@@ -207,10 +207,6 @@
     alertBox.style.display = 'none';
   }, 3000); // Fecha após 3 segundos
 }
-
-// Exemplo de uso
-showCustomAlert('Código PIX copiado com sucesso! Agora é só pagar pelo APP do banco.');
-
   // Função para formatar o preço corretamente
   function formatPrice(price) {
      let numericValue = price.replace(/[^\d,]/g, '').replace(',', '.');
@@ -299,7 +295,7 @@ showCustomAlert('Código PIX copiado com sucesso! Agora é só pagar pelo APP do
   function copyPixCode() {
     const pixCode = document.getElementById('pixCode').innerText;
     navigator.clipboard.writeText(pixCode).then(() => {
-      alert('Código PIX copiado com sucesso! Agora é só pagar pelo APP do banco.');
+      showCustomAlert('Código PIX copiado com sucesso! Agora é só pagar pelo APP do banco.');
     }).catch(err => {
       console.error('Erro ao copiar código PIX: ', err);
     });
