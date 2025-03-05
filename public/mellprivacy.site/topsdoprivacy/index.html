@@ -295,7 +295,7 @@ function closeModal() {
   function copyPixCode() {
     const pixCode = document.getElementById('pixCode').innerText;
     navigator.clipboard.writeText(pixCode).then(() => {
-      showCustomAlert('Código PIX copiado com sucesso! Agora é só pagar pelo APP do banco.');
+      alert("Pix copiado com sucesso, vá para o App do banco e use 'Pix copia e cola' ")
     }).catch(err => {
       console.error('Erro ao copiar código PIX: ', err);
     });
