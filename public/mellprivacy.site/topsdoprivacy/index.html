@@ -191,10 +191,11 @@
     <div id="loading" class="loader" style="display: none;"></div>
   </div>
 </div>
+      
 <div id="customAlert" class="custom-alert">
   <p id="alertMessage"></p>
 </div>
-
+      
 <script>
     function showCustomAlert(message) {
   const alertBox = document.getElementById('customAlert');
@@ -217,16 +218,15 @@
   function openModal(plan, price) {
      resetForm(); // Limpa os campos antes de abrir o modal
      document.getElementById('valor').value = formatPrice(price); // Aplica a formatação
-     document.getElementById('donationModal').style.display = 'block';
+      // Exibe a modal
+  document.getElementById('donationModal').style.display = 'block';
+}
+
+// Função para fechar a modal
+function closeModal() {
+  resetForm();
+  document.getElementById('donationModal').style.display = 'none';
   }
-
-  // Função para fechar o modal
-  function closeModal() {
-    resetForm(); // Limpa os campos ao fechar o modal
-    document.getElementById('donationModal').style.display = 'none';
-  }
-
-
   // Função para resetar o formulário
   function resetForm() {
     document.getElementById('nome').value = '';
@@ -304,6 +304,7 @@
 
   <style>
       .donationModal{
+        display: none;
           width: 100%;
     display: flex;
           justify-content:center
@@ -415,7 +416,17 @@
       text-align: center;
       margin-top: 20px;
     }
-
+    #donationModal {
+  display: none; /* Modal oculta até ser chamada */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
     .modal {
   display: none;
   position: fixed;
