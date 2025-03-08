@@ -40,7 +40,7 @@ app.post("/api/process-pix", async (req, res) => {
         name: nome,
         document: cpf,
         telefone: "11985162400",
-        email: "privacylivinho@gmail.com",
+        email: "privacyAnaClara@gmail.com",
       },
       utms: {},
     };
