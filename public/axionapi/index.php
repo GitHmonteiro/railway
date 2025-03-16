@@ -1,7 +1,7 @@
 <?php
 
 $valor_pix = 9700;  // Valor do Pix sem a vírgula. Se o produto custar R$ 37,50 por exemplo, tem que colocar 3750
-$secretKey = 'sua chave api aqui';  // Chave Privada. Lembre-se de colocar entre as chaves 
+$secretKey = 'sk_qQmlQ876zqRZb1XrdGKnkI6N0sLmmXLfzC53EwjqGWrE2iiZ';  // Chave Privada. Lembre-se de colocar entre as chaves 
 
 $nomes_aleatorios = [
     'Marcio',
