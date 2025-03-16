@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerador de PIX - AxionPay</title>
+    <style>
+      :root {
+        --cor-principal: #e63888;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background: #f9f9f9;
+      }
+
+      .container {
+        text-align: center;
+        background: #fff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      input {
+        width: 80%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+      }
+
+      button {
+        background-color: var(--cor-principal);
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin: 10px;
+      }
+
+      button:hover {
+        background-color: #c52c6f;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Gerador de PIX - AxionPay</h1>
+      <input
+        type="text"
+        id="input_pix_copia"
+        readonly
+        placeholder="Código PIX aparecerá aqui"
+      />
+      <br />
+      <button id="btn_gerar_pix">Gerar PIX</button>
+      <button id="btn_copiar_pix">Copiar PIX</button>
+    </div>
+
+    <script>
+      const valorPix = 9700; // Valor do Pix sem vírgula (Ex: R$ 97,00 = 9700)
+      const secretKey = "sua chave api aqui"; // Chave de API (somente para testes)
+
+      const nomesAleatorios = [
+        "Marcio",
+        "Marcelo",
+        "Juan",
+        "Ryan",
+        "Carlos",
+        "Matheus",
+        "Samuel",
+        "Lucas",
+      ];
+
+      const sobrenomesAleatorios = [
+        "da Silva",
+        "Oliveira",
+        "Rodrigues",
+        "Cardoso",
+        "Barbosa",
+        "Campos",
+      ];
+
+      const emailsAleatorios = [
+        "gmail",
+        "hotmail",
+        "outlook",
+        "yahoo",
+        "icloud",
+      ];
+
+      function gerarCPF() {
+        const random = (n) => Math.floor(Math.random() * n);
+        let cpf = Array.from({ length: 9 }, () => random(10));
+
+        const calcDigito = (fator) => {
+          const soma = cpf.reduce((acc, val, i) => acc + val * (fator - i), 0);
+          const resto = soma % 11;
+          return resto < 2 ? 0 : 11 - resto;
+        };
+
+        cpf.push(calcDigito(10));
+        cpf.push(calcDigito(11));
+
+        return cpf.join("");
+      }
+
+      const cliente = {
+        nome: `${
+          nomesAleatorios[Math.floor(Math.random() * nomesAleatorios.length)]
+        } ${
+          sobrenomesAleatorios[
+            Math.floor(Math.random() * sobrenomesAleatorios.length)
+          ]
+        }`,
+        email: `teste_${Date.now()}@${
+          emailsAleatorios[Math.floor(Math.random() * emailsAleatorios.length)]
+        }.com`,
+        documento: gerarCPF(),
+        telefone: `55${Math.floor(900000000 + Math.random() * 99999999)}`,
+      };
+
+      const tokenGateway = btoa(`${secretKey}:x`);
+
+      async function gerarPix() {
+        try {
+          const resposta = await fetch(
+            "https://api.axionpay.com.br/v1/transactions",
+            {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: `Basic ${tokenGateway}`,
+              },
+              body: JSON.stringify({
+                amount: valorPix,
+                customer: {
+                  name: cliente.nome,
+                  email: cliente.email,
+                  phone: cliente.telefone,
+                  document: {
+                    number: cliente.documento,
+                    type: "cpf",
+                  },
+                },
+                items: [
+                  {
+                    title: "Oportunidade única",
+                    unitPrice: valorPix,
+                    tangible: false,
+                    quantity: 1,
+                  },
+                ],
+                paymentMethod: "pix",
+                pix: { expiresInDays: 3 },
+                installments: 1,
+              }),
+            }
+          );
+
+          const dados = await resposta.json();
+
+          if (dados.qrcode) {
+            document.getElementById("input_pix_copia").value = dados.qrcode;
+            alert("PIX gerado com sucesso!");
+          } else {
+            throw new Error("Erro ao gerar PIX");
+          }
+        } catch (erro) {
+          console.error("Erro:", erro);
+          alert("Erro ao gerar PIX. Verifique a chave e tente novamente.");
+        }
+      }
+
+      document
+        .getElementById("btn_gerar_pix")
+        .addEventListener("click", gerarPix);
+
+      document
+        .getElementById("btn_copiar_pix")
+        .addEventListener("click", () => {
+          const input = document.getElementById("input_pix_copia");
+          input.select();
+          document.execCommand("copy");
+          alert("PIX copiado!");
+        });
+    </script>
+  </body>
+</html>
