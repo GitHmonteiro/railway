@@ -161,7 +161,7 @@ export function MultiStepModal({ onComplete }: MultiStepModalProps) {
                     name="cep"
                     value={formatCepDisplay(formData.cep)}
                     onChange={handleInputChange}
-                    placeholder="Ex: 36047-020 ou 36047020"
+                    placeholder="Seu CEP"
                     maxLength={9} // 8 digits + 1 hyphen
                   />
                   <p className="text-xs text-gray-500 mt-1">Formato aceito: 00000-000 ou 00000000</p>
