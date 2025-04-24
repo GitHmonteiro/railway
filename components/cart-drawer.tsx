@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { useCartStore } from "@/lib/cart"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
-
+import { FacebookPixelService } from '../app/checkout/pixel.service';
 interface CartDrawerProps {
   isOpen: boolean
   onClose: () => void
@@ -51,6 +51,14 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
   }
 
   const handleCheckout = () => {
+    FacebookPixelService.initialize();
+    function trackInitiateCheckout(products: Array<{ id: string; quantity: number }>) {
+      FacebookPixelService.track('InitiateCheckout', {
+        content_type: 'product',
+        contents: products,
+        num_items: products.length
+      });
+    }
     onClose()
     router.push("/checkout")
   }

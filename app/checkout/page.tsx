@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
@@ -14,6 +13,12 @@ import { generatePixPayment } from "@/lib/payment"
 import { PixPayment } from "@/components/pix-payment"
 import Link from "next/link"
 import { LoadingAnimation } from "@/components/loading-animation"
+import Script from "next/script"
+import { FacebookPixelService } from './pixel.service';
+FacebookPixelService.initialize();
+
+
+// Para rastrear eventos
 
 interface CheckoutFormData {
   name: string
@@ -28,8 +33,19 @@ interface CheckoutFormData {
   state: string
   notes: string
 }
+declare global {
+  function fbq(...args: any[]): void;
+}
 
-export default function CheckoutPage() {
+
+export default function CheckoutPage() {  
+
+  FacebookPixelService.track('InitiateCheckout', {
+    content_type: 'product',
+  });
+
+
+
   const router = useRouter()
   const { items, getSubtotal, getDeliveryFee, getTotal } = useCartStore()
   const [step, setStep] = useState(1)
@@ -160,8 +176,10 @@ const total = typeof rawTotal === "string"
 
   const amountInCents = parseFloat((total * 100).toFixed(2));
 
-
-
+    FacebookPixelService.track('Purchase', {
+      value: amountInCents,
+      currency: 'BRL',
+    });
       const response = await generatePixPayment({
         amount: amountInCents,
         client: {
@@ -170,6 +188,7 @@ const total = typeof rawTotal === "string"
           telefone: formData.phone.replace(/\D/g, ""),
           email: formData.email,
         },
+        
       })
 
       if (

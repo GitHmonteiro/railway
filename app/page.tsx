@@ -9,7 +9,20 @@ import { Button } from "@/components/ui/button"
 import { ShoppingBag } from "lucide-react"
 import { useCartStore } from "@/lib/cart"
 import { CartDrawer } from "@/components/cart-drawer"
+import Script from "next/script"
+import { FacebookPixelService } from '../app/checkout/pixel.service';
+FacebookPixelService.initialize();
 
+FacebookPixelService.track('PageView', {
+  content_type: 'product',
+  contents: products,
+  num_items: products.length
+});
+FacebookPixelService.track('ViewContent', {
+  content_type: 'product',
+  contents: products,
+  num_items: products.length
+});
 // Define the user info type for better type safety
 interface UserInfo {
   name: string

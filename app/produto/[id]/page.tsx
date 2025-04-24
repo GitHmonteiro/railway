@@ -13,7 +13,13 @@ import { InstagramVideo } from "@/components/instagram-video"
 import { useCartStore, type CartItem } from "@/lib/cart"
 import { useRouter } from "next/navigation"
 import { toast } from "@/components/ui/use-toast"
-
+import { FacebookPixelService } from '@/app/checkout/pixel.service';
+FacebookPixelService.initialize();
+FacebookPixelService.track('PageView', {
+  content_type: 'product',
+  contents: products,
+  num_items: products.length
+});
 export default function ProductPage({ params }: { params: { id: string } }) {
   const [verMais, setVerMais] = useState(false)
   const productId = Number.parseInt(params.id)
@@ -71,6 +77,19 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   }
 
   const handleAddToOrder = () => {
+
+    FacebookPixelService.track('AddToCart', {
+      content_type: 'product',
+      contents: products,
+      num_items: products.length
+    });
+
+    FacebookPixelService.track('PageView', {
+      content_type: 'product',
+      contents: products,
+      num_items: products.length
+    });
+    
     // Create cart item
     const cartItem: CartItem = {
       product,
