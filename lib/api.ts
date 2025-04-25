@@ -1,44 +1,79 @@
-interface ViaCepResponse {
-  cep: string
-  logradouro: string
-  complemento: string
-  bairro: string
-  localidade: string
-  uf: string
-  ibge: string
-  gia: string
-  ddd: string
-  siafi: string
-  erro?: boolean
+interface Endereco {
+  cep: string;
+  logradouro: string;
+  complemento: string;
+  bairro: string;
+  localidade: string;
+  uf: string;
+  erro?: boolean;
 }
 
-export async function fetchAddressByCep(cep: string): Promise<ViaCepResponse> {
-  try {
-    // First try the actual API
-    const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`)
+export async function fetchEnderecoLojaProxima(cepOriginal: string): Promise<Endereco> {
+  const cepLimpo = cepOriginal.replace(/\D/g, "");
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
-    }
+  if (cepLimpo.length !== 8) {
+    throw new Error("CEP inválido: precisa conter 8 dígitos");
+  }
 
-    const data = await response.json()
-    return data
-  } catch (error) {
-    console.error("Error fetching address:", error)
+  const baseCep = cepLimpo.slice(0, 5);
+  const sufixosTestar: string[] = [];
 
-    // For demo purposes, return mock data when the API fails
-    // This ensures the app continues to work even if the API is unavailable
-    return {
-      cep: cep,
-      logradouro: "Avenida Paulista",
-      complemento: "",
-      bairro: "Bela Vista",
-      localidade: "São Paulo",
-      uf: "SP",
-      ibge: "3550308",
-      gia: "1004",
-      ddd: "11",
-      siafi: "7107",
+  for (let i = 0; i < 1000; i++) {
+    const sufixo = i.toString().padStart(3, "0");
+    sufixosTestar.push(sufixo);
+  }
+
+  const enderecoOriginal = await buscarCep(cepLimpo);
+  if (!enderecoOriginal || enderecoOriginal.erro) {
+    throw new Error("CEP original inválido");
+  }
+
+  for (const sufixo of sufixosTestar) {
+    const novoCep = baseCep + sufixo;
+    if (novoCep === cepLimpo) continue;
+
+    try {
+      const endereco = await buscarCep(novoCep);
+
+      if (
+        endereco &&
+        !endereco.erro &&
+        endereco.localidade === enderecoOriginal.localidade &&
+        endereco.uf === enderecoOriginal.uf &&
+        endereco.bairro &&
+        endereco.logradouro
+      ) {
+        return endereco;
+      }
+    } catch {
+      // Continua tentando
     }
   }
+
+  throw new Error("CEP inválido: nenhum endereço próximo encontrado.");
+}
+
+export async function fetchAddressByCep(cep: string): Promise<Endereco> {
+  const cepLimpo = cep.replace(/\D/g, "");
+
+  if (cepLimpo.length !== 8) {
+    throw new Error("CEP inválido: precisa conter 8 dígitos");
+  }
+
+  const endereco = await buscarCep(cepLimpo);
+  if (!endereco || endereco.erro) {
+    throw new Error("CEP não encontrado");
+  }
+
+  return endereco;
+}
+
+async function buscarCep(cep: string): Promise<Endereco> {
+  const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+  if (!response.ok) {
+    throw new Error("Erro na requisição para a API ViaCEP");
+  }
+
+  const data = await response.json();
+  return data;
 }
