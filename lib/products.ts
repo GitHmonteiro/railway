@@ -80,8 +80,8 @@ export const products: Product[] = [
     image: "/images/produto2.jpg",
     // Example local video
     media: {
-      type: "instagram",
-      url: "https://www.instagram.com/p/DIPYrE3RSEK/?hl=pt",
+      type: "local",
+      url: "/videos/produto2.mp4"",
     },
     ingredients: [
       "Arroz japonês",
@@ -114,7 +114,7 @@ export const products: Product[] = [
     image: "/images/produto3.jpg",
     media: {
       type: "local",
-      url: "/videos/produto1.mp4",
+      url: "/videos/produto3.mp4",
     },
     ingredients: [
       "Arroz japonês",
