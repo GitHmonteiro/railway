@@ -81,7 +81,7 @@ export const products: Product[] = [
     // Example local video
     media: {
       type: "local",
-      url: "/videos/produto2.mp4"",
+      url: "/videos/produto2.mp4",
     },
     ingredients: [
       "Arroz japonês",
