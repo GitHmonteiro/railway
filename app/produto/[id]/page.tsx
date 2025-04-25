@@ -107,7 +107,12 @@ export default function ProductPage({ params }: { params: { id: string } }) {
       title: "Produto adicionado",
       description: `${product.name} foi adicionado ao seu carrinho.`,
       duration: 3000,
-    })
+      className: "shadow-md rounded-md",
+      style: {
+        border: "2px solid #ff23ab",
+      },
+    });
+    
 
     // Redirect to home page
     router.push("/")
