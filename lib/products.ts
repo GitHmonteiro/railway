@@ -224,7 +224,7 @@ export const products: Product[] = [
                  "- Uramaki: 10 Salmão Skin, 10 Skin Poró e 10 Uramaki Philadelphia.\n" +
                  "- Hossomaki: 10 Philadelphia e 10 Shakeroll.\n" +
                  "- Hot Roll: 20 Hot Philadelphia e 10 Hot Poró.\n" +
-                 "Acompanha 100ml de shoyu (02 garrafinhas)",
+                 "100ml de shoyu (02 garrafinhas)",
     price: 109.90,
     image: "/images/produto7.jpg",
     ingredients: [
