@@ -53,10 +53,10 @@ export default function CheckoutPage() {
   const [error, setError] = useState("")
   const [isSimulation, setIsSimulation] = useState(false)
   const [paymentData, setPaymentData] = useState<{
-    paymentCode: string
-    paymentCodeBase64: string
-    transactionId: string
-  } | null>(null)
+    paymentCode: string;
+    paymentCodeBase64: string;
+    transactionId: string; // Agora apenas string
+  } | null>(null);
 
   const [formData, setFormData] = useState<CheckoutFormData>({
     name: "",
@@ -158,28 +158,27 @@ export default function CheckoutPage() {
   }
 
   const handleSubmit = async () => {
-    const validationError = validateForm()
+    const validationError = validateForm();
     if (validationError) {
-      setError(validationError)
-      return
+      setError(validationError);
+      return;
     }
-
-    setLoading(true)
-    setError("")
-
+  
+    setLoading(true);
+    setError("");
+  
     try {
-      const rawTotal = getTotal() as string | number
-
-const total = typeof rawTotal === "string"
-  ? parseFloat(rawTotal.replace(/\./g, "").replace(",", ".")) / 100
-  : rawTotal / 100
-
-  const amountInCents = parseFloat((total * 100).toFixed(2));
-
-    FacebookPixelService.track('Purchase', {
-      value: amountInCents,
-      currency: 'BRL',
-    });
+      const rawTotal = getTotal() as string | number;
+      const total = typeof rawTotal === "string"
+        ? parseFloat(rawTotal.replace(/\./g, "").replace(",", "."))
+        : rawTotal;
+      const amountInCents = Math.round(total * 100);
+  
+      FacebookPixelService.track('Purchase', {
+        value: amountInCents,
+        currency: 'BRL',
+      });
+  
       const response = await generatePixPayment({
         amount: amountInCents,
         client: {
@@ -188,35 +187,29 @@ const total = typeof rawTotal === "string"
           telefone: formData.phone.replace(/\D/g, ""),
           email: formData.email,
         },
-        
-      })
-
-      if (
-        response.status === "success" &&
-        response.paymentCode &&
-        response.paymentCodeBase64 &&
-        response.idTransaction
-      ) {
+      });
+  
+      console.log("Response:", response);
+  
+      if (response?.status === "success" && response.paymentCode && response.paymentCodeBase64) {
         setPaymentData({
           paymentCode: response.paymentCode,
           paymentCodeBase64: response.paymentCodeBase64,
-          transactionId: response.idTransaction,
-        })
-
-        // Verifica se é uma simulação (pelo ID da transação começando com "SIMU-")
-        if (response.idTransaction.startsWith("SIMU-")) {
-          setIsSimulation(true)
-        }
-
-        setStep(4) // Move to payment success step
+          transactionId: String(response.idTransaction || "SEM-ID"), // Conversão explícita para string
+        });
+  
+        const transactionIdStr = String(response.idTransaction || "");
+        setIsSimulation(transactionIdStr.startsWith("SIMU-"));
+  
+        setStep(4);
       } else {
-        setError(response.message || "Erro ao gerar pagamento. Tente novamente.")
+        setError(response?.message || "Erro ao gerar pagamento. Tente novamente.");
       }
     } catch (error) {
-      console.error("Payment error:", error)
-      setError("Erro ao processar pagamento. Tente novamente.")
+      console.error("Payment error:", error);
+      setError("Erro ao processar pagamento. Tente novamente.");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
@@ -284,14 +277,16 @@ const total = typeof rawTotal === "string"
         <div className="flex flex-col items-center justify-center py-12">
           <LoadingAnimation />
           <p className="mt-4 text-gray-600">Processando seu pagamento...</p>
+          
         </div>
       ) : step === 4 && paymentData ? (
         <PixPayment
-          paymentCode={paymentData.paymentCode}
-          paymentCodeBase64={paymentData.paymentCodeBase64}
-          transactionId={paymentData.transactionId}
-          isSimulation={isSimulation}
-        />
+  paymentCode={paymentData.paymentCode}
+  paymentCodeBase64={paymentData.paymentCodeBase64}
+  transactionId={paymentData.transactionId}
+  isSimulation={isSimulation}
+/>
+
       ) : (
         <div className="grid md:grid-cols-3 gap-8">
           <div className="md:col-span-2">

@@ -48,7 +48,7 @@ export const products: Product[] = [
   - 10x Hot Crock (peixe, cream cheese)\n
   Acompanha:\n
   - 100ml de shoyu (02 garrafinhas)`,
-    price: 59.9,
+    price: 45.00,
     image: "/images/produto1.jpg",
     media: {
       type: "local",
@@ -76,7 +76,7 @@ export const products: Product[] = [
       "Hosomakis - Philadelphia (10) e Shakeroll (5)\n" +
       "Hot Rolls - Philadelphia (10)\n" +
       "Acompanha 50ml de shoyu. (01 garrafinha)",
-    price: 24.9,
+    price: 25.00,
     image: "/images/produto2.jpg",
     // Example local video
     media: {
@@ -110,7 +110,7 @@ export const products: Product[] = [
       "Hosomakis - Philadelphia (20) e Shakeroll (10)\n" +
       "Hot Rolls - Philadelphia (30)\n" +
       "Acompanha 100ml de shoyu. (02 garrafinhas)",
-    price: 32.9,
+    price: 50.00,
     image: "/images/produto3.jpg",
     media: {
       type: "local",
@@ -143,7 +143,7 @@ export const products: Product[] = [
       "Hosomakis - Philadelphia (20) e Shakeroll (10)\n" +
       "Hot Rolls - Philadelphia (20)\n" +
       "Acompanha 100ml de shoyu. (02 garrafinhas)",
-    price: 36.9,
+    price: 50.00,
     image: "/images/produto4.jpg",
     media: {
       type: "local",
@@ -175,7 +175,7 @@ export const products: Product[] = [
                  "Hosomaki - Philadélphia (9), Shakemaki (9), Salmão skin (6), Skin roll (6), Kanicheese (6)\n" +
                  "Hot Rolls - Hot philadélphia (12)\n" +
                  "Acompanha 50ml de shoyu (01 garrafinha)",
-    price: 42.9,
+    price: 59.90,
     image: "/images/produto5.jpg",
     ingredients: [
       "Salmão fresco premium",
@@ -196,10 +196,10 @@ export const products: Product[] = [
   },  
   {
     id: 6,
-    name: "Combo Hot Variados",
+    name: "Combo Hot Variados - 50 Peças",
     description: "Hot Rolls - Philadelphia (20), Hot Romeu e Julieta (10), Haru Hot (10) e Ebi Hot (10).\n" +
                  "Acompanha 50ml de shoyu (01 garrafinha)",
-    price: 28.9,
+    price: 49.90,
     image: "/images/produto6.jpg",
     ingredients: [
       "Arroz japonês",
@@ -225,7 +225,7 @@ export const products: Product[] = [
                  "- Hossomaki: 10 Philadelphia e 10 Shakeroll.\n" +
                  "- Hot Roll: 20 Hot Philadelphia e 10 Hot Poró.\n" +
                  "Acompanha 100ml de shoyu (02 garrafinhas)",
-    price: 39.9,
+    price: 109.90,
     image: "/images/produto7.jpg",
     ingredients: [
       "Macarrão yakisoba",
@@ -255,7 +255,7 @@ export const products: Product[] = [
                  "Hosomakis - Philadelphia (8)\n" +
                  "Hot Rolls - Hot Philadelphia (16) e Haru Hot (4)\n" +
                  "Acompanha 100ml de shoyu (02 garrafinhas)",
-    price: 22.9,
+    price: 109.90,
     image: "/images/produto8.jpg",
     ingredients: [
       "Massa de gyoza",
@@ -282,7 +282,7 @@ export const products: Product[] = [
                  "Hosomakis - Philadelphia (4)\n" +
                  "Hot Rolls - Hot Philadelphia (8) e Haru Hot (2)\n" +
                  "Acompanha 50ml de shoyu (01 garrafinha)",
-    price: 34.9,
+    price: 89.90,
     image: "/images/produto9.jpg",
     ingredients: [
       "Arroz japonês",
@@ -309,7 +309,7 @@ export const products: Product[] = [
     name: "Combo Gourmet - 40 peças",
     description: "Combinado vegetariano com 15 peças, incluindo uramaki de pepino,\n" +
                  "hossomaki de manga e nigiri de abacate.",
-    price: 45.9,
+    price: 59.90,
     image: "/images/produto10.jpg",
     ingredients: [
       "Arroz japonês",

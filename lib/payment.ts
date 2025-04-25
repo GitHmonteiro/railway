@@ -18,16 +18,15 @@ export interface PaymentRequest {
 }
 
 export interface PaymentResponse {
-  status: string
-  message: string
-  paymentCode?: string
-  idTransaction?: string
-  paymentCodeBase64?: string
+  status: string;
+  message: string;
+  paymentCode?: string;
+  idTransaction?: string | number; // Aceita string ou number
+  paymentCodeBase64?: string;
 }
 
 export async function generatePixPayment(paymentData: PaymentRequest): Promise<PaymentResponse> {
   try {
-    // Agora chamamos nossa própria API em vez da API do BytePayCash diretamente
     const response = await fetch("/api/payment", {
       method: "POST",
       headers: {
