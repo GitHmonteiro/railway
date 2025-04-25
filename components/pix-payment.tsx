@@ -5,7 +5,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { CheckCircle2, Clock, Copy, AlertCircle } from "lucide-react"
 import { useRouter } from "next/navigation"
-
+import { ChevronLeft, CreditCard, MapPin, ShoppingBag, Truck } from "lucide-react"
 interface PixPaymentProps {
   paymentCode: string;
   paymentCodeBase64: string;
@@ -59,9 +59,9 @@ export function PixPayment({
           setTimeout(() => setStatusAtual("confirmado_pagamento"), 30000); // 30 segundos
 
           setTimeout(() => setStatusAtual("confirmado_restaurante"), 50000); // 20 segundos após
-          setTimeout(() => setStatusAtual("preparando_pedido"), 1050000); // 20 minutos após
-          setTimeout(() => setStatusAtual("motoboy_busca"), 1120000); // 7 minutos após
-          setTimeout(() => setStatusAtual("motoboy_entrega"), 1370000); // 30 minutos após
+          setTimeout(() => setStatusAtual("preparando_pedido"), 150000); // 20 minutos após
+          setTimeout(() => setStatusAtual("motoboy_busca"), 42000); // 7 minutos após
+          setTimeout(() => setStatusAtual("motoboy_entrega"), 30000); // 30 minutos após
         } else if (status === "waiting_payment") {
           setStatusAtual("aguardando_pagamento");
         } else {
@@ -197,6 +197,7 @@ export function PixPayment({
           >
             Copiar código PIX
           </Button>
+          
         </div>
       </div>
 
@@ -224,6 +225,10 @@ export function PixPayment({
       </div>
     );
   })}
+  <div className="mt-6 flex items-center text-sm text-gray-900">
+                <Truck className="h-4 w-4 mr-2" />
+                <span>Entrega estimada em até 45-60 minutos</span>
+  </div>
 </div>
 
 
@@ -240,13 +245,6 @@ export function PixPayment({
       <div className="text-center text-sm text-gray-500 my-4">
         <p>ID da transação: {transactionId}</p>
       </div>
-
-      <Button
-        className="w-full bg-pink-500 hover:bg-pink-600"
-        onClick={() => router.push("/")}
-      >
-        Voltar ao cardápio
-      </Button>
     </div>
   );
 }
