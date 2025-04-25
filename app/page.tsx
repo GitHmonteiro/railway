@@ -1,120 +1,124 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { ProductCard } from "@/components/product-card"
-import { MultiStepModal } from "@/components/multi-step-modal"
-import { Logo } from "@/components/logo"
-import { products } from "@/lib/products"
-import { Button } from "@/components/ui/button"
-import { ShoppingBag } from "lucide-react"
-import { useCartStore } from "@/lib/cart"
-import { CartDrawer } from "@/components/cart-drawer"
-import Script from "next/script"
-import { FacebookPixelService } from '../app/checkout/pixel.service';
-FacebookPixelService.initialize();
+import { useEffect, useState } from "react";
+import { ProductCard } from "@/components/product-card";
+import { MultiStepModal } from "@/components/multi-step-modal";
+import { Logo } from "@/components/logo";
+import { products } from "@/lib/products";
+import { Button } from "@/components/ui/button";
+import { ShoppingBag } from "lucide-react";
+import { useCartStore } from "@/lib/cart";
+import { fetchEnderecoLojaProxima } from "@/lib/api";
+import { CartDrawer } from "@/components/cart-drawer";
 
-FacebookPixelService.track('PageView', {
-  content_type: 'product',
-  contents: products,
-  num_items: products.length
-});
-FacebookPixelService.track('ViewContent', {
-  content_type: 'product',
-  contents: products,
-  num_items: products.length
-});
-// Define the user info type for better type safety
 interface UserInfo {
-  name: string
-  address: string
-  neighborhood: string
-  city: string
-  state: string
-  complement: string
-  reference: string
+  name: string;
+  cep: string;
+  address: string;
+  neighborhood: string;
+  city: string;
+  state: string;
+  complement: string;
+  reference: string;
+}
+
+interface LojaFake {
+  neighborhood: string;
+  address: string;
 }
 
 export default function Home() {
-  const [showModal, setShowModal] = useState(false)
-  const [userInfo, setUserInfo] = useState<UserInfo | null>(null)
-  const [showStoreFound, setShowStoreFound] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
-  const [showCart, setShowCart] = useState(false)
+  const [showModal, setShowModal] = useState(false);
+  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+  const [storeInfo, setStoreInfo] = useState<LojaFake | null>(null);
+  const [showStoreFound, setShowStoreFound] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [showCart, setShowCart] = useState(false);
 
-  const { getItemCount } = useCartStore()
-  const itemCount = getItemCount()
+  const { getItemCount } = useCartStore();
+  const itemCount = getItemCount();
 
-  // Load user data from localStorage on component mount
   useEffect(() => {
-    // Wrap in try/catch to handle potential localStorage errors
     try {
-      const savedUserInfo = localStorage.getItem("sushi4you_user_info")
+      const savedUserInfo = localStorage.getItem("sushi4you_user_info");
+      const savedStoreInfo = localStorage.getItem("sushi4you_store_info");
 
       if (savedUserInfo) {
-        // If we have saved user info, parse and use it
-        setUserInfo(JSON.parse(savedUserInfo))
-        setShowModal(false)
+        setUserInfo(JSON.parse(savedUserInfo));
+        setShowModal(false);
       } else {
-        // If no saved user info, show the modal
-        setShowModal(true)
+        setShowModal(true);
+      }
+
+      if (savedStoreInfo) {
+        setStoreInfo(JSON.parse(savedStoreInfo));
       }
     } catch (error) {
-      console.error("Error accessing localStorage:", error)
-      // If localStorage fails, default to showing the modal
-      setShowModal(true)
+      console.error("Erro ao acessar localStorage:", error);
+      setShowModal(true);
     }
 
-    // Set loading to false after checking localStorage
-    setIsLoading(false)
-  }, [])
+    setIsLoading(false);
+  }, []);
 
-  const handleModalComplete = (data: UserInfo) => {
-    setUserInfo(data)
-    setShowModal(false)
+  const handleModalComplete = async (data: UserInfo) => {
+    setUserInfo(data);
+    setShowModal(false);
 
-    // Save user info to localStorage
     try {
-      localStorage.setItem("sushi4you_user_info", JSON.stringify(data))
+      localStorage.setItem("sushi4you_user_info", JSON.stringify(data));
     } catch (error) {
-      console.error("Error saving to localStorage:", error)
+      console.error("Erro ao salvar dados do usuário:", error);
     }
 
-    setShowStoreFound(true)
+    try {
+      const storeData = await fetchEnderecoLojaProxima(data.cep);
 
-    // Hide store found modal after 3 seconds
-    setTimeout(() => {
-      setShowStoreFound(false)
-    }, 3000)
-  }
+      if (storeData) {
+        const lojaFake: LojaFake = {
+          neighborhood: storeData.bairro,
+          address: storeData.logradouro,
+        };
 
-  // Function to clear user data (useful for testing)
+        setStoreInfo(lojaFake);
+        localStorage.setItem("sushi4you_store_info", JSON.stringify(lojaFake));
+
+        setShowStoreFound(true);
+        setTimeout(() => setShowStoreFound(false), 3000);
+      }
+    } catch (error) {
+      console.error("Erro ao buscar endereço da loja próxima:", error);
+    }
+  };
+
   const clearUserData = () => {
     try {
-      localStorage.removeItem("sushi4you_user_info")
-      setUserInfo(null)
-      setShowModal(true)
+      localStorage.removeItem("sushi4you_user_info");
+      localStorage.removeItem("sushi4you_store_info");
+      setUserInfo(null);
+      setStoreInfo(null);
+      setShowModal(true);
     } catch (error) {
-      console.error("Error clearing localStorage:", error)
+      console.error("Erro ao limpar os dados:", error);
     }
-  }
+  };
 
-  const promotionalProducts = products.slice(0, 4)
-  const regularProducts = products.slice(4)
+  const promotionalProducts = products.slice(0, 4);
+  const regularProducts = products.slice(4);
 
-  // Don't render anything while checking localStorage to prevent flash of modal
-  if (isLoading) {
-    return null
-  }
+  if (isLoading) return null;
 
   return (
     <div className="min-h-screen bg-white">
       {showModal && <MultiStepModal onComplete={handleModalComplete} />}
 
-      {showStoreFound && (
+      {showStoreFound && storeInfo && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full text-center">
             <h2 className="text-2xl font-bold text-pink-500 mb-2">Loja encontrada!</h2>
-            <p className="text-lg">Loja encontrada a 2,2 km de {userInfo?.neighborhood}</p>
+            <p className="text-lg">
+              Loja encontrada a 2,2 km em {storeInfo.address}, {storeInfo.neighborhood}
+            </p>
             <Button className="mt-4 bg-pink-500 hover:bg-pink-600" onClick={() => setShowStoreFound(false)}>
               Continuar
             </Button>
@@ -122,28 +126,32 @@ export default function Home() {
         </div>
       )}
 
-<header 
-  style={{ backgroundImage: 'url("/images/381043306_684701029912554_6472057376029863136_n.jpg")', backgroundSize: 'cover', backgroundPosition: 'center top' }} 
-  className="text-white py-6"
->
-      
+      <header
+        style={{
+          backgroundImage: 'url("/images/381043306_684701029912554_6472057376029863136_n.jpg")',
+          backgroundSize: "cover",
+          backgroundPosition: "center top",
+        }}
+        className="text-white py-6"
+      >
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center justify-center">
             <Logo />
             {userInfo && (
               <div className="mt-2 text-center">
-                {/* Removed customer name as requested */}
                 <p className="text-sm">
                   {userInfo.address}, {userInfo.complement} - {userInfo.neighborhood}
                 </p>
-                {/* Updated store status indicator with oval white background */}
-                <div className="flex justify-center mt-3 mb-2">
-                  <div className="bg-white text-black px-4 py-1 rounded-full flex items-center shadow-sm">
-                    <span className="text-sm font-medium">Loja mais próxima à 2,2km</span>
-                    <div className="ml-2 h-3 w-3 rounded-full bg-pink-500 animate-pulse"></div>
+                {storeInfo && (
+                  <div className="flex justify-center mt-3 mb-2">
+                    <div className="bg-white text-black px-4 py-1 rounded-full flex items-center shadow-sm">
+                      <span className="text-sm font-medium">
+                        Loja mais próxima em - {storeInfo.address}, {storeInfo.neighborhood}
+                      </span>
+                      <div className="ml-2 h-3 w-3 rounded-full bg-pink-500 animate-pulse"></div>
+                    </div>
                   </div>
-                </div>
-
+                )}
                 <button onClick={clearUserData} className="text-xs underline mt-1 opacity-70 hover:opacity-100">
                   Alterar endereço
                 </button>
@@ -194,5 +202,5 @@ export default function Home() {
 
       <CartDrawer isOpen={showCart} onClose={() => setShowCart(false)} />
     </div>
-  )
+  );
 }
