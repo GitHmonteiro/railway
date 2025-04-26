@@ -88,7 +88,7 @@ export const useCartStore = create<CartStore>()(
 
       getDeliveryFee: () => {
         // Fixed delivery fee of R$ 8.90
-        return 8.90
+        return 4.90
       },
 
       getTotal: () => {
