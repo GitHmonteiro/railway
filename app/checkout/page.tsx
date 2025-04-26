@@ -175,7 +175,7 @@ export default function CheckoutPage() {
       const amountInCents = Math.round(total * 100);
   
       FacebookPixelService.track('Purchase', {
-        value: amountInCents,
+        value: total,
         currency: 'BRL',
       });
   
