@@ -105,11 +105,6 @@ export default function Home() {
 
   const promotionalProducts = products.slice(0, 4);
   const regularProducts = products.slice(4);
-<<<<<<< HEAD
-=======
-  
->>>>>>> b732b70 (Seletor de quantidade)
-
   if (isLoading) return null;
 
   return (

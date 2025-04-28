@@ -128,8 +128,7 @@ export const products: Product[] = [
     media: {
       type: "local",
       url: "/videos/produto3.mp4",
-<<<<<<< HEAD
-=======
+
     },
     ingredients: [
       "Arroz japonês",
@@ -163,7 +162,6 @@ export const products: Product[] = [
     media: {
       type: "local",
       url: "/videos/produto3.mp4",
->>>>>>> b732b70 (Seletor de quantidade)
     },
     ingredients: [
       "Arroz japonês",
