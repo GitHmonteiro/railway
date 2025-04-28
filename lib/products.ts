@@ -191,8 +191,8 @@ export const products: Product[] = [
       "Hosomakis - Philadelphia (20) e Shakeroll (10)\n" +
       "Hot Rolls - Philadelphia (20)\n" +
       "Acompanha 100ml de shoyu. (02 garrafinhas)",
-    price: 50.00,
-    image: "/images/produto5.jpg",
+    price: 59.90,
+    image: "/images/produto15.jpg",
     media: {
       type: "local",
       url: "/videos/produto1.mp4",
