@@ -120,7 +120,7 @@ export async function GET(req: Request) {
   const transactionId = searchParams.get("id")
 
   const res = await fetch(
-    `https://api.conta.skalepay.com.br/v1/transactions/${transactionId}`, {
+    `https://api.axionpay.com.br/v1/transactions/${transactionId}`, {
     headers: {
       accept: "application/json",
       authorization: `${authorizationHeader}`
