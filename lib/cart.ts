@@ -88,10 +88,6 @@ export const useCartStore = create<CartStore>()(
       },
 
       getDeliveryFee: () => {
- 
-        // Fixed delivery fee of R$ 8.90
-        return 4.90
-
         const cart = useCartStore.getState();
       const idProduto = cart.items[0]?.product.id;
         if(idProduto === 1){
