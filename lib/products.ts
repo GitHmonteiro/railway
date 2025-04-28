@@ -137,9 +137,18 @@ export const products: Product[] = [
       "Cebolinha"
     ],
     additionals: [
-      { id: 1, name: "Molho tarê extra", price: 4.0 },
-      { id: 2, name: "Cream cheese extra", price: 3.0 },
-      { id: 3, name: "Porção de batata palha", price: 5.5 }
+      { id: 1, name: "Sashimi de Salmão - 5", price: 5 },
+      { id: 2, name: "Sashimi de Salmão Ice - 5 ", price: 6 },
+      { id: 3, name: "Salmão Skin - 5", price: 4.0 },
+      { id: 4, name: "Skin Roll - 5", price: 5 },
+      { id: 5, name: "Philadelphia - 5", price: 5 },
+      { id: 6, name: "Shakemaki - 5", price: 4 },
+      { id: 7, name: "Hot Rolls - 5", price: 5 },
+      { id: 8, name: "Hot - 5", price: 5 },
+      { id: 9, name: "Uramakis - Nutella - 5", price: 6.0 },
+      { id: 10, name: "Romeu e Julietta - 5", price: 6.0 },
+      { id: 11, name: "Molho tarê extra", price: 4.0 },
+      { id: 12, name: "Cream cheese extra", price: 5.0 },
     ],
     accompaniments: [
       { id: 1, name: "Molho shoyu", included: true },
@@ -170,9 +179,18 @@ export const products: Product[] = [
       "Nori"
     ],
     additionals: [
-      { id: 1, name: "Camarão extra", price: 7.0 },
-      { id: 2, name: "Abacate extra", price: 3.5 },
-      { id: 3, name: "Molho especial", price: 4.5 }
+      { id: 1, name: "Sashimi de Salmão - 5", price: 5 },
+      { id: 2, name: "Sashimi de Salmão Ice - 5 ", price: 6 },
+      { id: 3, name: "Salmão Skin - 5", price: 4.0 },
+      { id: 4, name: "Skin Roll - 5", price: 5 },
+      { id: 5, name: "Philadelphia - 5", price: 5 },
+      { id: 6, name: "Shakemaki - 5", price: 4 },
+      { id: 7, name: "Hot Rolls - 5", price: 5 },
+      { id: 8, name: "Hot - 5", price: 5 },
+      { id: 9, name: "Uramakis - Nutella - 5", price: 6.0 },
+      { id: 10, name: "Romeu e Julietta - 5", price: 6.0 },
+      { id: 11, name: "Molho tarê extra", price: 4.0 },
+      { id: 12, name: "Cream cheese extra", price: 5.0 },
     ],
     accompaniments: [
       { id: 1, name: "Molho shoyu", included: true },
@@ -196,9 +214,18 @@ export const products: Product[] = [
       "Cebolinha"
     ],
     additionals: [
-      { id: 1, name: "Porção extra (5 fatias)", price: 15.0 },
-      { id: 2, name: "Molho ponzu extra", price: 4.0 },
-      { id: 3, name: "Azeite trufado", price: 6.5 }
+      { id: 1, name: "Sashimi de Salmão - 5", price: 5 },
+      { id: 2, name: "Sashimi de Salmão Ice - 5 ", price: 6 },
+      { id: 3, name: "Salmão Skin - 5", price: 4.0 },
+      { id: 4, name: "Skin Roll - 5", price: 5 },
+      { id: 5, name: "Philadelphia - 5", price: 5 },
+      { id: 6, name: "Shakemaki - 5", price: 4 },
+      { id: 7, name: "Hot Rolls - 5", price: 5 },
+      { id: 8, name: "Hot - 5", price: 5 },
+      { id: 9, name: "Uramakis - Nutella - 5", price: 6.0 },
+      { id: 10, name: "Romeu e Julietta - 5", price: 6.0 },
+      { id: 11, name: "Molho tarê extra", price: 4.0 },
+      { id: 12, name: "Cream cheese extra", price: 5.0 },
     ],
     accompaniments: [
       { id: 1, name: "Molho shoyu", included: true },
@@ -220,8 +247,18 @@ export const products: Product[] = [
       "Cebolinha"
     ],
     additionals: [
-      { id: 1, name: "Ovas extra", price: 8.0 },
-      { id: 2, name: "Molho especial", price: 4.0 }
+      { id: 1, name: "Sashimi de Salmão - 5", price: 5 },
+      { id: 2, name: "Sashimi de Salmão Ice - 5 ", price: 6 },
+      { id: 3, name: "Salmão Skin - 5", price: 4.0 },
+      { id: 4, name: "Skin Roll - 5", price: 5 },
+      { id: 5, name: "Philadelphia - 5", price: 5 },
+      { id: 6, name: "Shakemaki - 5", price: 4 },
+      { id: 7, name: "Hot Rolls - 5", price: 5 },
+      { id: 8, name: "Hot - 5", price: 5 },
+      { id: 9, name: "Uramakis - Nutella - 5", price: 6.0 },
+      { id: 10, name: "Romeu e Julietta - 5", price: 6.0 },
+      { id: 11, name: "Molho tarê extra", price: 4.0 },
+      { id: 12, name: "Cream cheese extra", price: 5.0 },
     ],
     accompaniments: [
       { id: 1, name: "Molho shoyu", included: true },
@@ -249,9 +286,18 @@ export const products: Product[] = [
       "Molho especial"
     ],
     additionals: [
-      { id: 1, name: "Carne extra", price: 10.0 },
-      { id: 2, name: "Legumes extras", price: 5.0 },
-      { id: 3, name: "Molho extra", price: 3.5 }
+      { id: 1, name: "Sashimi de Salmão - 5", price: 5 },
+      { id: 2, name: "Sashimi de Salmão Ice - 5 ", price: 6 },
+      { id: 3, name: "Salmão Skin - 5", price: 4.0 },
+      { id: 4, name: "Skin Roll - 5", price: 5 },
+      { id: 5, name: "Philadelphia - 5", price: 5 },
+      { id: 6, name: "Shakemaki - 5", price: 4 },
+      { id: 7, name: "Hot Rolls - 5", price: 5 },
+      { id: 8, name: "Hot - 5", price: 5 },
+      { id: 9, name: "Uramakis - Nutella - 5", price: 6.0 },
+      { id: 10, name: "Romeu e Julietta - 5", price: 6.0 },
+      { id: 11, name: "Molho tarê extra", price: 4.0 },
+      { id: 12, name: "Cream cheese extra", price: 5.0 },
     ],
     accompaniments: [
       { id: 1, name: "Hashi", included: true },
@@ -278,8 +324,18 @@ export const products: Product[] = [
       "Alho"
     ],
     additionals: [
-      { id: 1, name: "Porção extra (3 unidades)", price: 10.0 },
-      { id: 2, name: "Molho agridoce", price: 3.5 }
+      { id: 1, name: "Sashimi de Salmão - 5", price: 5 },
+      { id: 2, name: "Sashimi de Salmão Ice - 5 ", price: 6 },
+      { id: 3, name: "Salmão Skin - 5", price: 4.0 },
+      { id: 4, name: "Skin Roll - 5", price: 5 },
+      { id: 5, name: "Philadelphia - 5", price: 5 },
+      { id: 6, name: "Shakemaki - 5", price: 4 },
+      { id: 7, name: "Hot Rolls - 5", price: 5 },
+      { id: 8, name: "Hot - 5", price: 5 },
+      { id: 9, name: "Uramakis - Nutella - 5", price: 6.0 },
+      { id: 10, name: "Romeu e Julietta - 5", price: 6.0 },
+      { id: 11, name: "Molho tarê extra", price: 4.0 },
+      { id: 12, name: "Cream cheese extra", price: 5.0 },
     ],
     accompaniments: [
       { id: 1, name: "Molho especial para gyoza", included: true }
@@ -307,9 +363,18 @@ export const products: Product[] = [
       "Molho especial"
     ],
     additionals: [
-      { id: 1, name: "Salmão extra", price: 8.0 },
-      { id: 2, name: "Abacate extra", price: 3.5 },
-      { id: 3, name: "Cream cheese", price: 3.0 }
+      { id: 1, name: "Sashimi de Salmão - 5", price: 5 },
+      { id: 2, name: "Sashimi de Salmão Ice - 5 ", price: 6 },
+      { id: 3, name: "Salmão Skin - 5", price: 4.0 },
+      { id: 4, name: "Skin Roll - 5", price: 5 },
+      { id: 5, name: "Philadelphia - 5", price: 5 },
+      { id: 6, name: "Shakemaki - 5", price: 4 },
+      { id: 7, name: "Hot Rolls - 5", price: 5 },
+      { id: 8, name: "Hot - 5", price: 5 },
+      { id: 9, name: "Uramakis - Nutella - 5", price: 6.0 },
+      { id: 10, name: "Romeu e Julietta - 5", price: 6.0 },
+      { id: 11, name: "Molho tarê extra", price: 4.0 },
+      { id: 12, name: "Cream cheese extra", price: 5.0 },
     ],
     accompaniments: [
       { id: 1, name: "Molho shoyu", included: true },
@@ -333,8 +398,18 @@ export const products: Product[] = [
       "Gergelim"
     ],
     additionals: [
-      { id: 1, name: "Cream cheese vegano", price: 4.0 },
-      { id: 2, name: "Molho tarê vegano", price: 4.0 }
+      { id: 1, name: "Sashimi de Salmão - 5", price: 5 },
+      { id: 2, name: "Sashimi de Salmão Ice - 5 ", price: 6 },
+      { id: 3, name: "Salmão Skin - 5", price: 4.0 },
+      { id: 4, name: "Skin Roll - 5", price: 5 },
+      { id: 5, name: "Philadelphia - 5", price: 5 },
+      { id: 6, name: "Shakemaki - 5", price: 4 },
+      { id: 7, name: "Hot Rolls - 5", price: 5 },
+      { id: 8, name: "Hot - 5", price: 5 },
+      { id: 9, name: "Uramakis - Nutella - 5", price: 6.0 },
+      { id: 10, name: "Romeu e Julietta - 5", price: 6.0 },
+      { id: 11, name: "Molho tarê extra", price: 4.0 },
+      { id: 12, name: "Cream cheese extra", price: 5.0 },
     ],
     accompaniments: [
       { id: 1, name: "Molho shoyu", included: true },
