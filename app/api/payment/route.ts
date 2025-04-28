@@ -11,13 +11,13 @@ async function generateQRCode(data: string): Promise<string> {
    // Buscar Venda
    // https://api.axionpay.com.br/v1/transactions/{id}
 
-//const token = 'sk_live_v2KHGJ5RjtOjyqgljLXMpcfXmHDNfKEV8gMnwJmCxh';
-//const senha = 'x';
-//const AxionVenda ="https://api.axionpay.com.br/v1/transactions";
-//const AxionBuscarVenda =  `https://api.conta.skalepay.com.br/v1/transactions/${transactionId}`;
-
 const token = 'sk_live_v2KHGJ5RjtOjyqgljLXMpcfXmHDNfKEV8gMnwJmCxh';
-const senha = 'x';
+const senha = '@Hy10203040';
+//const SkaleVenda ="https://api.conta.skalepay.com.br/v1/transactions";
+//const  SkaleBuscarVenda =  `https://api.conta.skalepay.com.br/v1/transactions/${transactionId}`;
+
+//const tokenSkale = 'sk_live_v2KHGJ5RjtOjyqgljLXMpcfXmHDNfKEV8gMnwJmCxh';
+//const senhaSkale = 'x';
 
     // Junta token e senha
     const tokenSenha = token + ':' + senha;
@@ -70,7 +70,7 @@ export async function POST(request: Request) {
 
     
 
-    const response = await fetch("https://api.conta.skalepay.com.br/v1/transactions", {
+    const response = await fetch(" https://api.axionpay.com.br/v1/transactions", {
       method: "POST",
       headers: {
         accept: "application/json",
