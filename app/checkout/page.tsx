@@ -518,19 +518,29 @@ export default function CheckoutPage() {
                     </div>
                   </div>
 
-                  <div>
+                  <div>,
                     <h3 className="font-medium text-gray-700 mb-2">Método de Pagamento</h3>
                     <div className="bg-gray-50 p-3 rounded-md">
                       <div className="flex items-center">
-                        <div className="h-10 w-10 bg-pink-100 rounded-full flex items-center justify-center mr-3">
-                          <span className="text-pink-500 font-bold">PIX</span>
-                        </div>
+                      <div className="h-10 w-10 bg-pink-100 rounded-full flex items-center justify-center mr-3">
+                      <span
+                        style={{
+                          backgroundImage: "url('/images/pix.png')",
+                          width: '24px',
+                          height: '24px',
+                          backgroundSize: 'cover'
+                        }}></span>
+                      </div>
                         <div>
                           <p className="font-medium">Pagamento via PIX</p>
                           <p className="text-sm text-gray-500">Pagamento instantâneo</p>
+
+                          
                         </div>
+                        
                       </div>
                     </div>
+                    <p className="text-sm text-gray-500">Pagamento na entrega indisponível</p>
                   </div>
                 </div>
 
@@ -557,12 +567,17 @@ export default function CheckoutPage() {
                     <div>
                       <span className="font-medium">{item.quantity}x</span> {item.product.name}
                       {item.additionals.length > 0 && (
-                        <div className="text-xs text-gray-500 ml-4">
-                          {item.additionals.map((id) => {
-                            const additional = item.product.additionals.find((a) => a.id === id)
-                            return additional ? <div key={id}>+ {additional.name}</div> : null
-                          })}
-                        </div>
+                       <div className="text-xs text-gray-500 ml-4">
+                       {item.additionals.map((id) => {
+                         // Garantir que 'id' é um número
+                         if (typeof id === 'number') {
+                           const additional = item.product.additionals.find((a) => a.id === id);
+                           return additional ? <div key={additional.id}>+ {additional.name}</div> : null;
+                         }
+                         return null;
+                       })}
+                     </div>
+                     
                       )}
                     </div>
                     <span>R$ {formatPrice(item.product.price * item.quantity)}</span>
