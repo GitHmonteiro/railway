@@ -151,34 +151,36 @@ export const products: Product[] = [
 
   {
     id: 4,
-    name: "Combo Executivo Makimonos - 100 peças",
+    name: "Combo Executivo - 100 peças",
     description:
-      "Uramakis - Salmão Skin (10), Skin Poró (10) e Peteroll (20)\n" +
+      "Sashimis - Sashimi de Salmão (10) e Sashimi de Salmão Ice (10)\n" +
+      "Uramakis - Salmão Skin (10), Skin Poró (10) e Peteroll (10)\n" +
       "Hosomakis - Philadelphia (20) e Shakeroll (10)\n" +
-      "Hot Rolls - Philadelphia (30)\n" +
+      "Hot Rolls - Philadelphia (20)\n" +
       "Acompanha 100ml de shoyu. (02 garrafinhas)",
     price: 50.00,
-    image: "/images/produto3.jpg",
+    image: "/images/produto4.jpg",
     media: {
       type: "local",
-      url: "/videos/produto3.mp4",
+      url: "/videos/produto1.mp4",
     },
     ingredients: [
       "Arroz japonês",
-      "Salmão fresco",
+      "Camarão empanado",
       "Cream cheese",
-      "Farinha panko",
-      "Molho tarê",
-      "Cebolinha"
+      "Abacate",
+      "Gergelim",
+      "Nori"
     ],
     additionals: [
-      { id: 1, name: "Molho tarê extra", price: 4.0 },
-      { id: 2, name: "Cream cheese extra", price: 3.0 },
-      { id: 3, name: "Porção de batata palha", price: 5.5 }
+      { id: 1, name: "Camarão extra", price: 7.0 },
+      { id: 2, name: "Abacate extra", price: 3.5 },
+      { id: 3, name: "Molho especial", price: 4.5 }
     ],
     accompaniments: [
       { id: 1, name: "Molho shoyu", included: true },
-      { id: 2, name: "Molho agridoce", included: true }
+      { id: 2, name: "Wasabi", included: true },
+      { id: 3, name: "Gengibre", included: true }
     ]
   },  
   {
