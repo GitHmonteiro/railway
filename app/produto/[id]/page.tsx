@@ -29,6 +29,8 @@ export default function ProductPage({ params }: { params: { id: string } }) {
 
   const [quantity, setQuantity] = useState(1)
   const [selectedAdditionals, setSelectedAdditionals] = useState<number[]>([])
+
+
   const [removedAccompaniments, setRemovedAccompaniments] = useState<number[]>([])
   const [showIframeModal, setShowIframeModal] = useState(false)
   const [notes, setNotes] = useState("")
@@ -54,8 +56,22 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     }
   }
 
-  const handleAdditionalToggle = (id: number) => {
-    setSelectedAdditionals((prev) => (prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]))
+  const handleIncreaseAdditional = (id: number) => {
+    setSelectedAdditionals(prev => ({
+      ...prev,
+      [id]: (prev[id] || 0) + 1,
+    }))
+  }
+  
+  const handleDecreaseAdditional = (id: number) => {
+    setSelectedAdditionals(prev => {
+      if (!prev[id]) return prev // Se já é 0, não faz nada
+      const updated = { ...prev, [id]: prev[id] - 1 }
+      if (updated[id] <= 0) {
+        delete updated[id] // Se quantidade for 0, remove do objeto
+      }
+      return updated
+    })
   }
 
   const handleAccompanimentToggle = (id: number) => {
@@ -66,10 +82,10 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     let total = product.price * quantity
 
     // Add price of selected additionals
-    selectedAdditionals.forEach((id) => {
-      const additional = product.additionals.find((a) => a.id === id)
+    Object.entries(selectedAdditionals).forEach(([id, qty]) => {
+      const additional = product.additionals.find((a) => a.id === Number(id))
       if (additional) {
-        total += additional.price
+        total += additional.price * qty
       }
     })
 
@@ -94,7 +110,10 @@ export default function ProductPage({ params }: { params: { id: string } }) {
     const cartItem: CartItem = {
       product,
       quantity,
-      additionals: selectedAdditionals,
+      additionals: Object.entries(selectedAdditionals).map(([id, quantity]) => ({
+        id: Number(id),
+        quantity,
+      })), // aqui está o valor correto
       removedAccompaniments,
       notes: notes.trim() || undefined,
     }
@@ -233,34 +252,46 @@ export default function ProductPage({ params }: { params: { id: string } }) {
             </div>
           )}
 
-          {product.additionals.length > 0 && (
-            <div className="mb-6">
-              <h2 className="text-lg font-semibold mb-3 text-cyan-600">Adicionais</h2>
-              <div className="space-y-2">
-                {product.additionals.map((item) => (
-                  <div
-                    key={item.id}
-                    className={`flex items-center justify-between p-3 rounded-md border ${
-                      selectedAdditionals.includes(item.id) ? "border-pink-500 bg-pink-50" : "border-gray-200"
-                    } cursor-pointer`}
-                    onClick={() => handleAdditionalToggle(item.id)}
-                  >
-                    <div className="flex items-center">
-                      <Checkbox
-                        id={`additional-${item.id}`}
-                        checked={selectedAdditionals.includes(item.id)}
-                        onCheckedChange={() => handleAdditionalToggle(item.id)}
-                      />
-                      <Label htmlFor={`additional-${item.id}`} className="ml-2 cursor-pointer">
-                        {item.name}
-                      </Label>
-                    </div>
-                    <span className="font-medium">+ R$ {item.price.toFixed(2).replace(".", ",")}</span>
-                  </div>
-                ))}
-              </div>
+{product.additionals.length > 0 && (
+  <div className="mb-6">
+    <h2 className="text-lg font-semibold mb-3 text-cyan-600">Adicionais</h2>
+    <div className="space-y-2">
+      {product.additionals.map((item) => {
+        const quantity = selectedAdditionals[item.id] || 0
+        return (
+          <div
+            key={item.id}
+            className="flex items-center justify-between p-3 rounded-md border border-gray-200"
+          >
+            <div>
+              <Label className="font-medium">{item.name}</Label>
+              <div className="text-sm text-gray-500">+ R$ {item.price.toFixed(2).replace(".", ",")}</div>
             </div>
-          )}
+            <div className="flex items-center space-x-2">
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => handleDecreaseAdditional(item.id)}
+                disabled={quantity <= 0}
+              >
+                <Minus className="h-4 w-4" />
+              </Button>
+              <span className="w-6 text-center">{quantity}</span>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => handleIncreaseAdditional(item.id)}
+              >
+                <Plus className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  </div>
+)}
+
 
           <div className="mt-8">
             <div className="flex items-center justify-between mb-4">

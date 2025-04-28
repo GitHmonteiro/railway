@@ -5,6 +5,33 @@ async function generateQRCode(data: string): Promise<string> {
   return QRCode.toDataURL(data, { errorCorrectionLevel: 'H' });
 }
 
+// END-Point AXION
+   // Venda 
+   // https://api.axionpay.com.br/v1/transactions
+   // Buscar Venda
+   // https://api.axionpay.com.br/v1/transactions/{id}
+
+//const token = 'sk_live_v2KHGJ5RjtOjyqgljLXMpcfXmHDNfKEV8gMnwJmCxh';
+//const senha = 'x';
+//const AxionVenda ="https://api.axionpay.com.br/v1/transactions";
+//const AxionBuscarVenda =  `https://api.conta.skalepay.com.br/v1/transactions/${transactionId}`;
+
+const token = 'sk_live_v2KHGJ5RjtOjyqgljLXMpcfXmHDNfKEV8gMnwJmCxh';
+const senha = 'x';
+
+    // Junta token e senha
+    const tokenSenha = token + ':' + senha;
+
+    // Converte para Base64
+    const base64 = btoa(tokenSenha);
+
+    // Monta o Authorization Header
+    const authorizationHeader = 'Basic ' + base64;
+
+    // Decodificando de volta pra conferir
+    const decoded = atob(base64);
+    const [decodedToken, decodedSenha] = decoded.split(':');
+
 export async function POST(request: Request) {
   try {
     const paymentData = await request.json();
@@ -33,7 +60,7 @@ export async function POST(request: Request) {
       },
       items: [
         {
-          title: "Pedido delivery",
+          title: paymentData.description || "Pedido delivery",
           unitPrice: paymentData.amount,
           quantity: 1,
           tangible: true,
@@ -41,19 +68,21 @@ export async function POST(request: Request) {
       ],
     };
 
-    const response = await fetch("https://api.axionpay.com.br/v1/transactions", {
+    
+
+    const response = await fetch("https://api.conta.skalepay.com.br/v1/transactions", {
       method: "POST",
       headers: {
         accept: "application/json",
         "content-type": "application/json",
-        authorization: "Basic c2tfcVFtbFE4NzZ6cVJaYjFYcmRHS25rSTZOMHNMbW1YTGZ6QzUzRXdqcUdXckUyaWlaOkBIeTEwMjAzMDQw",
+        authorization: `${authorizationHeader}`,
       },
       body: JSON.stringify(payload),
     });
 
     if (!response.ok) {
-      console.error("Erro AxionPay:", await response.text());
-      throw new Error("Erro na requisição para AxionPay");
+      console.error("Erro Skale:", await response.text());
+      throw new Error("Erro na requisição para Skale");
     }
 
     const data = await response.json();
@@ -82,15 +111,17 @@ export async function POST(request: Request) {
     }, { status: 500 });
   }
 }
+
 // app/api/status/route.ts
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url)
   const transactionId = searchParams.get("id")
 
-  const res = await fetch(`https://api.axionpay.com.br/v1/transactions/${transactionId}`, {
+  const res = await fetch(
+    `https://api.conta.skalepay.com.br/v1/transactions/${transactionId}`, {
     headers: {
       accept: "application/json",
-      authorization: "Basic c2tfcVFtbFE4NzZ6cVJaYjFYcmRHS25rSTZOMHNMbW1YTGZ6QzUzRXdqcUdXckUyaWlaOkBIeTEwMjAzMDQw"
+      authorization: `${authorizationHeader}`
     }
   })
 

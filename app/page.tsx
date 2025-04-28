@@ -105,6 +105,10 @@ export default function Home() {
 
   const promotionalProducts = products.slice(0, 4);
   const regularProducts = products.slice(4);
+<<<<<<< HEAD
+=======
+  
+>>>>>>> b732b70 (Seletor de quantidade)
 
   if (isLoading) return null;
 
@@ -171,7 +175,7 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {promotionalProducts.map((product) => (
-              <ProductCard key={product.id} product={product} isPromo={true} />
+              <ProductCard key={product.id} product={product} isPromo={true}hidePrice={product.id === 1}  />
             ))}
           </div>
         </section>
@@ -181,6 +185,8 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {regularProducts.map((product) => (
               <ProductCard key={product.id} product={product} isPromo={false} />
+
+
             ))}
           </div>
         </section>

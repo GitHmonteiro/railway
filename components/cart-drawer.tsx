@@ -138,8 +138,10 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                           <div className="mt-1">
                             <span className="text-xs font-medium text-gray-700">Adicionais:</span>
                             <ul className="text-xs ml-2">
-                              {item.additionals.map((id) => (
-                                <li key={id}>+ {getAdditionalName(item, id)}</li>
+                            {item.additionals.map((additional) => (
+                                <li key={additional.id}>
+                                  + {getAdditionalName(item, additional.id)} ({additional.quantity}x)
+                                </li>
                               ))}
                             </ul>
                           </div>

@@ -6,9 +6,10 @@ import type { Product } from "@/lib/products"
 interface ProductCardProps {
   product: Product
   isPromo: boolean
+  hidePrice?: boolean;
 }
 
-export function ProductCard({ product, isPromo }: ProductCardProps) {
+export function ProductCard({ product, isPromo,hidePrice  }: ProductCardProps) {
   return (
     <Link href={`/produto/${product.id}`}>
       <div className="group bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
@@ -26,18 +27,28 @@ export function ProductCard({ product, isPromo }: ProductCardProps) {
           <h3 className="font-bold text-lg text-gray-800">{product.name}</h3>
           <p className="text-gray-600 text-sm mt-1 line-clamp-2">{product.description}</p>
           <div className="mt-3 flex justify-between items-center">
-            <div>
-              {isPromo ? (
-                <div className="flex items-center gap-2">
-                  <span className="text-gray-500 line-through text-sm">
-                    R$ {(product.price * 1.2).toFixed(2).replace(".", ",")}
-                  </span>
-                  <span className="font-bold text-pink-500">R$ {product.price.toFixed(2).replace(".", ",")}</span>
-                </div>
-              ) : (
-                <span className="font-bold text-gray-800">R$ {product.price.toFixed(2).replace(".", ",")}</span>
-              )}
-            </div>
+            
+          <div>
+  {hidePrice ? null : (
+    isPromo ? (
+      <div className="flex items-center gap-2">
+        <span className="text-gray-500 line-through text-sm">
+          R$ {(product.price * 1.2).toFixed(2).replace(".", ",")}
+        </span>
+        <span className="font-bold text-pink-500">
+          R$ {product.price.toFixed(2).replace(".", ",")}
+        </span>
+      </div>
+    ) : (
+      <span className="font-bold text-gray-800">
+        R$ {product.price.toFixed(2).replace(".", ",")}
+      </span>
+    )
+  )}
+</div>
+
+                
+
             <span className="text-xs text-cyan-500">Ver detalhes →</span>
           </div>
         </div>

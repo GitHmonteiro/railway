@@ -1,11 +1,12 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
 import type { Product } from "./products"
+import { Item } from "@radix-ui/react-accordion"
 
 export interface CartItem {
   product: Product
   quantity: number
-  additionals: number[]
+  additionals: { id: number; quantity: number }[]
   removedAccompaniments: number[]
   notes?: string
 }
@@ -33,10 +34,11 @@ export const useCartStore = create<CartStore>()(
           const existingItemIndex = state.items.findIndex(
             (item) =>
               item.product.id === newItem.product.id &&
-              JSON.stringify(item.additionals.sort()) === JSON.stringify(newItem.additionals.sort()) &&
-              JSON.stringify(item.removedAccompaniments.sort()) ===
-                JSON.stringify(newItem.removedAccompaniments.sort()),
-          )
+              JSON.stringify([...item.additionals].sort((a, b) => a.id - b.id)) ===
+                JSON.stringify([...newItem.additionals].sort((a, b) => a.id - b.id)) &&
+              JSON.stringify([...item.removedAccompaniments].sort()) ===
+                JSON.stringify([...newItem.removedAccompaniments].sort()))
+            
 
           if (existingItemIndex !== -1) {
             // If item exists, update its quantity
@@ -74,11 +76,10 @@ export const useCartStore = create<CartStore>()(
         return get().items.reduce((total, item) => {
           let itemTotal = item.product.price * item.quantity
 
-          // Add price of selected additionals
-          item.additionals.forEach((id) => {
+          item.additionals.forEach(({ id, quantity }) => {
             const additional = item.product.additionals.find((a) => a.id === id)
             if (additional) {
-              itemTotal += additional.price * item.quantity
+              itemTotal += additional.price * quantity
             }
           })
 
@@ -87,8 +88,19 @@ export const useCartStore = create<CartStore>()(
       },
 
       getDeliveryFee: () => {
+ 
         // Fixed delivery fee of R$ 8.90
         return 4.90
+
+        const cart = useCartStore.getState();
+      const idProduto = cart.items[0]?.product.id;
+        if(idProduto === 1){
+          return 0.0;
+        }
+        if(idProduto === 2){
+          return 11.90;
+        }
+        return 8.90
       },
 
       getTotal: () => {
