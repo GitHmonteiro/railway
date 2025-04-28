@@ -4,6 +4,7 @@ export interface Product {
   description: string
   price: number
   image: string
+  // Media options
   media?: {
     type: "instagram" | "local"
     url: string
@@ -17,7 +18,6 @@ export interface Additional {
   id: number
   name: string
   price: number
-  quantity?: number
 }
 
 export interface Accompaniment {
@@ -66,7 +66,7 @@ export const products: Product[] = [
   },
   {
     id: 2,
-    name: "Combo Pop - 16 Peças",
+    name: "Combo presente - 16 Peças",
     description: `
     16 peças já inclusas na promoção - \n
 
@@ -114,7 +114,6 @@ export const products: Product[] = [
       { id: 4, name: "Hashi", included: true },
     ],
   },
-
   {
     id: 3,
     name: "Combo Executivo Makimonos - 100 peças",
@@ -128,7 +127,6 @@ export const products: Product[] = [
     media: {
       type: "local",
       url: "/videos/produto3.mp4",
-
     },
     ingredients: [
       "Arroz japonês",
@@ -147,17 +145,17 @@ export const products: Product[] = [
       { id: 1, name: "Molho shoyu", included: true },
       { id: 2, name: "Molho agridoce", included: true }
     ]
-  },
-
+  },  
   {
     id: 4,
-    name: "Combo Executivo - 100 peças",
+    name: "Combo Executivo - 75 peças",
     description:
-      "Uramakis - Salmão Skin (10), 10 Skin Roll.\n" +
-      "Hosomakis -  25 Philadelphia, 25 Shakemaki e 10 Kanicheese.\n" +
-      "Hot Roll: 20 Hot Philadelphia.\n" +
+      "Sashimis - Sashimi de Salmão (10) e Sashimi de Salmão Ice (10)\n" +
+      "Uramakis - Salmão Skin (10), Skin Poró (10) e Peteroll (10)\n" +
+      "Hosomakis - Philadelphia (5) e Shakeroll (10)\n" +
+      "Hot Rolls - Philadelphia (10)\n" +
       "Acompanha 100ml de shoyu. (02 garrafinhas)",
-    price: 50.00,
+    price: 37.50,
     image: "/images/produto4.jpg",
     media: {
       type: "local",
@@ -184,40 +182,6 @@ export const products: Product[] = [
   },  
   {
     id: 5,
-    name: "Combo Executivo - 100 peças",
-    description:
-      "Sashimis - Sashimi de Salmão (10) e Sashimi de Salmão Ice (10)\n" +
-      "Uramakis - Salmão Skin (10), Skin Poró (10) e Peteroll (10)\n" +
-      "Hosomakis - Philadelphia (20) e Shakeroll (10)\n" +
-      "Hot Rolls - Philadelphia (20)\n" +
-      "Acompanha 100ml de shoyu. (02 garrafinhas)",
-    price: 59.90,
-    image: "/images/produto15.jpg",
-    media: {
-      type: "local",
-      url: "/videos/produto1.mp4",
-    },
-    ingredients: [
-      "Arroz japonês",
-      "Camarão empanado",
-      "Cream cheese",
-      "Abacate",
-      "Gergelim",
-      "Nori"
-    ],
-    additionals: [
-      { id: 1, name: "Camarão extra", price: 7.0 },
-      { id: 2, name: "Abacate extra", price: 3.5 },
-      { id: 3, name: "Molho especial", price: 4.5 }
-    ],
-    accompaniments: [
-      { id: 1, name: "Molho shoyu", included: true },
-      { id: 2, name: "Wasabi", included: true },
-      { id: 3, name: "Gengibre", included: true }
-    ]
-  },  
-  {
-    id: 6,
     name: "Combo - 60 peças",
     description: "Sashimis - Sashimi salmão (6), Sashimi salmão ice (6)\n" +
                  "Hosomaki - Philadélphia (9), Shakemaki (9), Salmão skin (6), Skin roll (6), Kanicheese (6)\n" +
@@ -243,7 +207,7 @@ export const products: Product[] = [
     ]
   },  
   {
-    id: 7,
+    id: 6,
     name: "Combo Hot Variados - 50 Peças",
     description: "Hot Rolls - Philadelphia (20), Hot Romeu e Julieta (10), Haru Hot (10) e Ebi Hot (10).\n" +
                  "Acompanha 50ml de shoyu (01 garrafinha)",
@@ -266,7 +230,7 @@ export const products: Product[] = [
     ]
   },
   {
-    id: 8,
+    id: 7,
     name: "Combo Especial - 100 peças",
     description: "Sashimi: 10 Sashimi de Salmão e 10 Sashimi de Salmão Ice.\n" +
                  "- Uramaki: 10 Salmão Skin, 10 Skin Poró e 10 Uramaki Philadelphia.\n" +
@@ -295,7 +259,7 @@ export const products: Product[] = [
     ]
   },  
   {
-    id: 9,
+    id: 8,
     name: "Combo Gourmet - 100 peças",
     description: "Sashimis - Sashimi de Salmão (8) e Sashimi de Salmão Ice (8)\n" +
                  "Niguiris - Niguiri de Salmão (4) e Niguiri de Camarão (4)\n" +
@@ -322,7 +286,7 @@ export const products: Product[] = [
     ]
   },  
   {
-    id: 10,
+    id: 9,
     name: "Combo Gourmet - 80 peças",
     description: "Sashimis - Sashimi de Salmão (4) e Sashimi de Salmão Ice (4)\n" +
                  "Niguiris - Niguiri de Salmão (2) e Niguiri de Camarão (2)\n" +
@@ -353,7 +317,7 @@ export const products: Product[] = [
     ]
   },
   {
-    id: 11,
+    id: 10,
     name: "Combo Gourmet - 40 peças",
     description: "Combinado vegetariano com 15 peças, incluindo uramaki de pepino,\n" +
                  "hossomaki de manga e nigiri de abacate.",
