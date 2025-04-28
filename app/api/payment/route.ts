@@ -11,8 +11,10 @@ async function generateQRCode(data: string): Promise<string> {
    // Buscar Venda
    // https://api.axionpay.com.br/v1/transactions/{id}
 
-const token = 'sk_live_v2KHGJ5RjtOjyqgljLXMpcfXmHDNfKEV8gMnwJmCxh';
+const token = 'sk_qQmlQ876zqRZb1XrdGKnkI6N0sLmmXLfzC53EwjqGWrE2iiZ';
 const senha = '@Hy10203040';
+
+
 //const SkaleVenda ="https://api.conta.skalepay.com.br/v1/transactions";
 //const  SkaleBuscarVenda =  `https://api.conta.skalepay.com.br/v1/transactions/${transactionId}`;
 
