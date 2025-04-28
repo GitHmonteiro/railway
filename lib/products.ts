@@ -153,10 +153,9 @@ export const products: Product[] = [
     id: 4,
     name: "Combo Executivo - 100 peças",
     description:
-      "Sashimis - Sashimi de Salmão (10) e Sashimi de Salmão Ice (10)\n" +
-      "Uramakis - Salmão Skin (10), Skin Poró (10) e Peteroll (10)\n" +
-      "Hosomakis - Philadelphia (20) e Shakeroll (10)\n" +
-      "Hot Rolls - Philadelphia (20)\n" +
+      "Uramakis - Salmão Skin (10), 10 Skin Roll.\n" +
+      "Hosomakis -  25 Philadelphia, 25 Shakemaki e 10 Kanicheese.\n" +
+      "Hot Roll: 20 Hot Philadelphia.\n" +
       "Acompanha 100ml de shoyu. (02 garrafinhas)",
     price: 50.00,
     image: "/images/produto4.jpg",
