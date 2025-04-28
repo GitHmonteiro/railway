@@ -192,7 +192,7 @@ export const products: Product[] = [
       "Hot Rolls - Philadelphia (20)\n" +
       "Acompanha 100ml de shoyu. (02 garrafinhas)",
     price: 50.00,
-    image: "/images/produto4.jpg",
+    image: "/images/produto5.jpg",
     media: {
       type: "local",
       url: "/videos/produto1.mp4",
