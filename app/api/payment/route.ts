@@ -48,10 +48,10 @@ export async function POST(request: Request) {
       paymentMethod: "pix",
       customer: {
         document: {
-          type: "cpf",
-          number: paymentData.client.document || "00000000000",
+          type: "cnpj",
+          number: "46908518000129",
         },
-        name: paymentData.client.name || "Cliente",
+        name: "Sushi4You",
         phone: paymentData.client.telefone || "00000000000",
         email: paymentData.client.email || "cliente@exemplo.com",
       },
