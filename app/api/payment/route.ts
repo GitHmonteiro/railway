@@ -13,16 +13,23 @@ async function generateQRCode(data: string): Promise<string> {
 
 //const token = 'sk_qQmlQ876zqRZb1XrdGKnkI6N0sLmmXLfzC53EwjqGWrE2iiZ';
 //const senha = '@Hy10203040';
-
-
+//-----------------------------------------------------------------------
+//END-POINT ASSET
+//VENDA 
+//https://api.assetpagamentos.com.br/v1/transactions
+// Buscar venda
+//https://api.assetpagamentos.com.br/v1/transactions/{transactionId}
+const tokenAsset = "sk_live_v2rUzdYxpjs5RlgeXRYFMNL5qSKZ7fOoWID5pQOiwh"
+const senhaAsset =  "x"
+//-----------------------------------------------------------------------
+//END-POINT SKALEPAY
 //const SkaleVenda ="https://api.conta.skalepay.com.br/v1/transactions";
 //const  SkaleBuscarVenda =  `https://api.conta.skalepay.com.br/v1/transactions/${transactionId}`;
-
-const tokenSkale = 'sk_live_v2KHGJ5RjtOjyqgljLXMpcfXmHDNfKEV8gMnwJmCxh';
-const senhaSkale = 'x';
+//const tokenSkale = 'sk_live_v2KHGJ5RjtOjyqgljLXMpcfXmHDNfKEV8gMnwJmCxh';
+//const senhaSkale = 'x';
 
     // Junta token e senha
-    const tokenSenha = tokenSkale + ':' + senhaSkale;
+    const tokenSenha = tokenAsset + ':' + senhaAsset;
 
     // Converte para Base64
     const base64 = btoa(tokenSenha);
@@ -40,7 +47,7 @@ export async function POST(request: Request) {
 
     if (!paymentData?.amount || !paymentData?.client) {
       return NextResponse.json(
-        { status: "error", message: "Dados de pagamento incompletos" },
+        { status: "error", message: "Dados de pagamento incompleto" },
         { status: 400 }
       );
     }
@@ -62,7 +69,7 @@ export async function POST(request: Request) {
       },
       items: [
         {
-          title: paymentData.description || "Pedido delivery",
+          title: paymentData.description || "Shark Burguer",
           unitPrice: paymentData.amount,
           quantity: 1,
           tangible: true,
@@ -72,7 +79,7 @@ export async function POST(request: Request) {
 
     
 
-    const response = await fetch("https://api.conta.skalepay.com.br/v1/transactions/", {
+    const response = await fetch("https://api.assetpagamentos.com.br/v1/transactions/", {
       method: "POST",
       headers: {
         accept: "application/json",
@@ -120,7 +127,7 @@ export async function GET(req: Request) {
   const transactionId = searchParams.get("id")
 
   const res = await fetch(
-    `https://api.conta.skalepay.com.br/v1/transactions/${transactionId}`, {
+    `https://api.assetpagamentos.com.br/v1/transactions/${transactionId}`, {
     headers: {
       accept: "application/json",
       authorization: `${authorizationHeader}`
